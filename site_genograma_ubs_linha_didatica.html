@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Genograma na UBS | Gravidez na Adolescência</title>
+
+  <style>
+    :root{
+      --azul:#005CA9;
+      --azul-escuro:#003F73;
+      --verde:#00A859;
+      --verde-escuro:#087B47;
+      --amarelo:#FDC300;
+      --fundo:#EAF6FF;
+      --fundo2:#F7FBFE;
+      --texto:#17324D;
+      --muted:#607284;
+      --linha:#D7E6F2;
+      --vermelho:#B3261E;
+      --branco:#FFFFFF;
+      --sombra:0 18px 45px rgba(0,92,169,.14);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      background:linear-gradient(180deg,#eaf6ff,#ffffff);
+      color:var(--texto);
+      line-height:1.58;
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:rgba(255,255,255,.94);
+      border-bottom:1px solid var(--linha);
+      box-shadow:0 4px 20px rgba(0,92,169,.06);
+      backdrop-filter:blur(10px);
+    }
+
+    nav{
+      max-width:1220px;
+      margin:auto;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:900;
+      color:var(--azul-escuro);
+      letter-spacing:-.02em;
+    }
+
+    .brand-mark{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      color:white;
+      background:linear-gradient(135deg,var(--azul),var(--verde));
+      font-size:1.35rem;
+      box-shadow:var(--sombra);
+    }
+
+    .links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:7px;
+      font-size:.88rem;
+      font-weight:800;
+      color:var(--muted);
+    }
+
+    .links a{
+      padding:8px 9px;
+      border-radius:999px;
+      transition:.2s;
+    }
+
+    .links a:hover{
+      background:var(--fundo);
+      color:var(--azul);
+    }
+
+    section{padding:78px 18px}
+    .container{max-width:1220px;margin:auto}
+
+    .hero{
+      min-height:calc(100vh - 72px);
+      display:grid;
+      align-items:center;
+      background:
+        radial-gradient(circle at 10% 10%,rgba(0,168,89,.14),transparent 30%),
+        radial-gradient(circle at 90% 15%,rgba(0,92,169,.16),transparent 30%),
+        linear-gradient(180deg,#ffffff,#eef8ff);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:38px;
+      align-items:center;
+    }
+
+    .pill{
+      display:inline-flex;
+      background:#EAFBF3;
+      color:var(--verde-escuro);
+      border:1px solid rgba(0,168,89,.22);
+      border-radius:999px;
+      padding:8px 13px;
+      font-size:.8rem;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      margin-bottom:16px;
+    }
+
+    h1{
+      font-size:clamp(2.35rem,6vw,5rem);
+      line-height:.98;
+      letter-spacing:-.055em;
+      color:var(--azul-escuro);
+      margin-bottom:20px;
+    }
+
+    h1 span{color:var(--verde)}
+
+    h2{
+      font-size:clamp(1.9rem,4vw,3.1rem);
+      line-height:1.06;
+      letter-spacing:-.04em;
+      color:var(--azul-escuro);
+      margin-bottom:12px;
+    }
+
+    h3{
+      color:var(--azul-escuro);
+      font-size:1.18rem;
+      margin-bottom:8px;
+    }
+
+    p{color:var(--muted)}
+    .lead{
+      font-size:clamp(1.03rem,2vw,1.24rem);
+      color:var(--muted);
+      margin-bottom:26px;
+      max-width:760px;
+    }
+
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:0;
+      border-radius:999px;
+      padding:13px 19px;
+      font-weight:900;
+      cursor:pointer;
+      text-decoration:none;
+      transition:.2s;
+    }
+
+    .btn:hover{transform:translateY(-2px)}
+    .btn1{background:var(--azul);color:#fff;box-shadow:0 12px 26px rgba(0,92,169,.24)}
+    .btn2{background:#fff;color:var(--azul);border:1px solid var(--linha)}
+    .btn3{background:var(--verde);color:white}
+
+    .card,.box,.stat,.flashcard,.game,.sheet-wrap{
+      background:#fff;
+      border:1px solid var(--linha);
+      border-radius:28px;
+      box-shadow:var(--sombra);
+    }
+
+    .card,.box,.stat{padding:24px}
+    .profile{
+      min-height:455px;
+      background:
+        linear-gradient(rgba(0,92,169,.04) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,92,169,.04) 1px,transparent 1px),
+        #fff;
+      background-size:28px 28px;
+      border-radius:24px;
+      border:1px solid var(--linha);
+      padding:24px;
+    }
+
+    .avatar{
+      width:82px;
+      height:82px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--azul),var(--verde));
+      display:grid;
+      place-items:center;
+      color:white;
+      font-size:2.1rem;
+      font-weight:900;
+      margin-bottom:14px;
+    }
+
+    .profile h2{font-size:1.8rem}
+    .profile ul{margin-top:14px;padding-left:20px;color:var(--muted)}
+    .profile li{margin-bottom:6px}
+
+    .heading{
+      text-align:center;
+      max-width:930px;
+      margin:0 auto 38px;
+    }
+
+    .heading p{
+      font-size:1.05rem;
+    }
+
+    .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+
+    .icon{
+      width:52px;
+      height:52px;
+      border-radius:17px;
+      background:var(--fundo);
+      color:var(--azul);
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      margin-bottom:14px;
+    }
+
+    .info{
+      margin-top:22px;
+      background:linear-gradient(135deg,#eaf6ff,#eafbf3);
+      border:1px solid rgba(0,92,169,.14);
+      border-left:6px solid var(--azul);
+      border-radius:24px;
+      padding:20px;
+    }
+
+    .info p{color:var(--muted)}
+    .stat strong{
+      display:block;
+      color:var(--azul);
+      font-size:2rem;
+      line-height:1;
+      margin-bottom:8px;
+    }
+    .stat span{color:var(--muted);font-size:.95rem}
+
+    .timeline{
+      display:grid;
+      gap:16px;
+      position:relative;
+    }
+
+    .timeline:before{
+      content:"";
+      position:absolute;
+      left:22px;
+      top:8px;
+      bottom:8px;
+      width:3px;
+      background:linear-gradient(var(--azul),var(--verde));
+    }
+
+    .timeline .card{
+      position:relative;
+      padding-left:62px;
+    }
+
+    .timeline .card:before{
+      content:"";
+      position:absolute;
+      left:13px;
+      top:25px;
+      width:20px;
+      height:20px;
+      border-radius:50%;
+      background:var(--amarelo);
+      border:4px solid #fff;
+      box-shadow:0 0 0 3px rgba(0,92,169,.15);
+    }
+
+    /* FLASHCARDS */
+    .flash-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+
+    .flashcard{
+      min-height:218px;
+      perspective:1000px;
+      cursor:pointer;
+      border:0;
+      padding:0;
+      background:transparent;
+      box-shadow:none;
+    }
+
+    .flashcard input{position:absolute;left:-9999px}
+
+    .flash-inner{
+      position:relative;
+      width:100%;
+      height:218px;
+      transform-style:preserve-3d;
+      transition:transform .7s;
+    }
+
+    .flashcard input:checked + .flash-inner{
+      transform:rotateY(180deg);
+    }
+
+    .flash-face{
+      position:absolute;
+      inset:0;
+      backface-visibility:hidden;
+      background:#fff;
+      border:1px solid var(--linha);
+      border-radius:28px;
+      box-shadow:var(--sombra);
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .flash-back{
+      transform:rotateY(180deg);
+      background:linear-gradient(135deg,var(--azul),#0879c9);
+      color:white;
+    }
+
+    .flash-back p,.flash-back h3{color:white}
+    .flash-top{
+      color:var(--verde-escuro);
+      font-size:.8rem;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .flash-face small{color:var(--muted);font-weight:800}
+    .flash-back small{color:rgba(255,255,255,.75)}
+
+    /* FOLHA SULFITE BUILDER */
+    .builder-layout{
+      display:grid;
+      grid-template-columns:330px 1fr;
+      gap:22px;
+      align-items:start;
+    }
+
+    .radio{
+      position:absolute;
+      left:-9999px;
+    }
+
+    .builder-aside{
+      background:white;
+      border:1px solid var(--linha);
+      border-radius:28px;
+      box-shadow:var(--sombra);
+      padding:20px;
+      position:sticky;
+      top:86px;
+    }
+
+    .builder-aside h3{
+      font-size:1.45rem;
+      margin-bottom:8px;
+    }
+
+    .builder-aside p{
+      margin-bottom:16px;
+      font-size:.95rem;
+    }
+
+    .steps{
+      display:grid;
+      gap:10px;
+    }
+
+    .step{
+      display:block;
+      cursor:pointer;
+      border:1px solid var(--linha);
+      background:#fff;
+      color:var(--texto);
+      border-radius:18px;
+      padding:13px 14px;
+      font-weight:900;
+      transition:.2s;
+    }
+
+    .step small{
+      display:block;
+      color:var(--muted);
+      font-weight:700;
+      margin-top:3px;
+      line-height:1.25;
+    }
+
+    .step:hover{
+      border-color:var(--azul);
+      background:var(--fundo);
+      transform:translateY(-1px);
+    }
+
+    #p1:checked ~ .builder-layout label[for="p1"],
+    #p2:checked ~ .builder-layout label[for="p2"],
+    #p3:checked ~ .builder-layout label[for="p3"],
+    #p4:checked ~ .builder-layout label[for="p4"],
+    #p5:checked ~ .builder-layout label[for="p5"],
+    #p6:checked ~ .builder-layout label[for="p6"],
+    #p7:checked ~ .builder-layout label[for="p7"]{
+      background:linear-gradient(135deg,var(--azul),#0879c9);
+      color:white;
+      border-color:transparent;
+      box-shadow:0 12px 26px rgba(0,92,169,.22);
+    }
+
+    #p1:checked ~ .builder-layout label[for="p1"] small,
+    #p2:checked ~ .builder-layout label[for="p2"] small,
+    #p3:checked ~ .builder-layout label[for="p3"] small,
+    #p4:checked ~ .builder-layout label[for="p4"] small,
+    #p5:checked ~ .builder-layout label[for="p5"] small,
+    #p6:checked ~ .builder-layout label[for="p6"] small,
+    #p7:checked ~ .builder-layout label[for="p7"] small{
+      color:rgba(255,255,255,.86);
+    }
+
+    .explain{
+      margin-top:16px;
+      padding:15px;
+      border-radius:18px;
+      background:#f7fbfe;
+      border:1px dashed rgba(0,92,169,.28);
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .exp{display:none}
+
+    #p1:checked ~ .builder-layout .exp1,
+    #p2:checked ~ .builder-layout .exp2,
+    #p3:checked ~ .builder-layout .exp3,
+    #p4:checked ~ .builder-layout .exp4,
+    #p5:checked ~ .builder-layout .exp5,
+    #p6:checked ~ .builder-layout .exp6,
+    #p7:checked ~ .builder-layout .exp7{display:block}
+
+    .sheet-wrap{
+      padding:24px;
+      overflow:auto;
+    }
+
+    .sheet-title{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+
+    .sheet-title h3{
+      font-size:1.45rem;
+    }
+
+    .sheet-title p{
+      font-size:.95rem;
+      margin-top:3px;
+    }
+
+    .badge{
+      background:#EAFBF3;
+      color:var(--verde-escuro);
+      border:1px solid rgba(0,168,89,.22);
+      border-radius:999px;
+      padding:8px 12px;
+      font-weight:900;
+      font-size:.82rem;
+      white-space:nowrap;
+    }
+
+    .sheet-viewport{
+      overflow:auto;
+    }
+
+    .sulfite{
+      position:relative;
+      margin:auto;
+      width:794px;
+      height:1123px;
+      background:
+        linear-gradient(rgba(0,92,169,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,92,169,.035) 1px,transparent 1px),
+        #fff;
+      background-size:26px 26px;
+      border:1px solid #d9d9d9;
+      box-shadow:
+        0 8px 22px rgba(0,0,0,.10),
+        0 30px 70px rgba(0,92,169,.16);
+      border-radius:4px;
+      overflow:hidden;
+    }
+
+    .paper-header{
+      position:absolute;
+      top:30px;
+      left:42px;
+      right:42px;
+      border-bottom:2px solid var(--linha);
+      padding-bottom:14px;
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:flex-start;
+      z-index:8;
+    }
+
+    .paper-header h3{
+      font-size:1.2rem;
+      margin-bottom:4px;
+    }
+
+    .paper-header p{
+      font-size:.82rem;
+    }
+
+    .sus-mark{
+      color:var(--azul);
+      font-weight:900;
+      font-size:1.1rem;
+    }
+
+    .gen-label{
+      position:absolute;
+      left:42px;
+      color:var(--azul-escuro);
+      font-weight:900;
+      font-size:.82rem;
+      background:white;
+      border:1px solid var(--linha);
+      border-radius:999px;
+      padding:6px 10px;
+      z-index:7;
+    }
+
+    .g1{top:125px}
+    .g2{top:390px}
+    .g3{top:690px}
+
+    .node,.line,.note,.tri,.pattern-box{
+      position:absolute;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .38s ease, transform .38s ease;
+    }
+
+    .node{
+      width:104px;
+      height:104px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-size:.77rem;
+      line-height:1.1;
+      font-weight:900;
+      color:var(--texto);
+      z-index:5;
+      transform:scale(.82);
+    }
+
+    .node .shape{
+      width:100%;
+      height:100%;
+      background:white;
+      border:4px solid var(--azul);
+      box-shadow:0 9px 20px rgba(0,92,169,.14);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      padding:9px;
+    }
+
+    .female .shape{border-radius:50%}
+    .male .shape{border-radius:12px}
+
+    .index .shape{
+      border-color:var(--verde);
+      box-shadow:0 0 0 7px rgba(0,168,89,.13),0 9px 20px rgba(0,92,169,.14);
+    }
+
+    .index .shape:before{
+      content:"";
+      position:absolute;
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:var(--verde);
+      top:17px;
+      left:50%;
+      transform:translateX(-50%);
+    }
+
+    .node small{
+      font-size:.65rem;
+      color:var(--muted);
+      font-weight:800;
+      margin-top:2px;
+    }
+
+    .line{
+      height:4px;
+      background:var(--azul);
+      border-radius:999px;
+      transform-origin:left center;
+      z-index:2;
+    }
+
+    .line.vertical{
+      width:4px;
+      height:100px;
+    }
+
+    .line.dashed{
+      background:repeating-linear-gradient(90deg,var(--azul),var(--azul) 10px,transparent 10px,transparent 18px);
+    }
+
+    .line.vertical.dashed{
+      background:repeating-linear-gradient(180deg,var(--azul),var(--azul) 10px,transparent 10px,transparent 18px);
+    }
+
+    .line.strong{
+      height:18px;
+      background:repeating-linear-gradient(180deg,var(--verde),var(--verde) 4px,transparent 4px,transparent 8px);
+    }
+
+    .line.conflict{
+      height:14px;
+      background:
+        linear-gradient(135deg,transparent 0 24%,var(--vermelho) 24% 36%,transparent 36% 50%,var(--vermelho) 50% 62%,transparent 62% 76%,var(--vermelho) 76% 88%,transparent 88%);
+      background-size:30px 14px;
+      border-radius:0;
+    }
+
+    .note{
+      background:white;
+      border:1px solid rgba(0,92,169,.25);
+      color:var(--azul-escuro);
+      border-radius:999px;
+      padding:7px 11px;
+      font-size:.76rem;
+      font-weight:900;
+      box-shadow:0 8px 18px rgba(0,92,169,.08);
+      white-space:nowrap;
+      z-index:9;
+      transform:translateY(8px);
+    }
+
+    .tri{
+      width:0;
+      height:0;
+      border-left:50px solid transparent;
+      border-right:50px solid transparent;
+      border-bottom:88px solid var(--amarelo);
+      filter:drop-shadow(0 8px 12px rgba(0,92,169,.15));
+      z-index:5;
+      transform:scale(.82);
+    }
+
+    .tri:after{
+      content:"Gestação atual";
+      position:absolute;
+      top:45px;
+      left:-40px;
+      width:80px;
+      text-align:center;
+      color:#5b4300;
+      font-size:.7rem;
+      line-height:1.1;
+      font-weight:900;
+    }
+
+    .pattern-box{
+      left:52px;
+      right:52px;
+      bottom:44px;
+      background:linear-gradient(135deg,#eafbf3,#f7fcff);
+      border:1px solid rgba(0,168,89,.25);
+      border-left:7px solid var(--verde);
+      border-radius:18px;
+      padding:16px 18px;
+      color:var(--texto);
+      box-shadow:0 10px 24px rgba(0,92,169,.10);
+      transform:translateY(10px);
+      z-index:12;
+    }
+
+    .pattern-box strong{
+      color:var(--verde-escuro);
+    }
+
+    #p1:checked ~ .builder-layout [data-step="1"],
+    #p2:checked ~ .builder-layout [data-step="1"],
+    #p2:checked ~ .builder-layout [data-step="2"],
+    #p3:checked ~ .builder-layout [data-step="1"],
+    #p3:checked ~ .builder-layout [data-step="2"],
+    #p3:checked ~ .builder-layout [data-step="3"],
+    #p4:checked ~ .builder-layout [data-step="1"],
+    #p4:checked ~ .builder-layout [data-step="2"],
+    #p4:checked ~ .builder-layout [data-step="3"],
+    #p4:checked ~ .builder-layout [data-step="4"],
+    #p5:checked ~ .builder-layout [data-step="1"],
+    #p5:checked ~ .builder-layout [data-step="2"],
+    #p5:checked ~ .builder-layout [data-step="3"],
+    #p5:checked ~ .builder-layout [data-step="4"],
+    #p5:checked ~ .builder-layout [data-step="5"],
+    #p6:checked ~ .builder-layout [data-step="1"],
+    #p6:checked ~ .builder-layout [data-step="2"],
+    #p6:checked ~ .builder-layout [data-step="3"],
+    #p6:checked ~ .builder-layout [data-step="4"],
+    #p6:checked ~ .builder-layout [data-step="5"],
+    #p6:checked ~ .builder-layout [data-step="6"],
+    #p7:checked ~ .builder-layout [data-step="1"],
+    #p7:checked ~ .builder-layout [data-step="2"],
+    #p7:checked ~ .builder-layout [data-step="3"],
+    #p7:checked ~ .builder-layout [data-step="4"],
+    #p7:checked ~ .builder-layout [data-step="5"],
+    #p7:checked ~ .builder-layout [data-step="6"],
+    #p7:checked ~ .builder-layout [data-step="7"]{
+      opacity:1;
+      transform:scale(1) translateY(0);
+    }
+
+    #p3:checked ~ .builder-layout .keep,
+    #p4:checked ~ .builder-layout .keep,
+    #p5:checked ~ .builder-layout .keep,
+    #p6:checked ~ .builder-layout .keep,
+    #p7:checked ~ .builder-layout .keep{
+      opacity:1;
+    }
+
+    .legend{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .legend div{
+      background:#f7fbfe;
+      border:1px solid var(--linha);
+      border-radius:14px;
+      padding:11px;
+      color:var(--muted);
+      font-size:.88rem;
+      font-weight:800;
+    }
+
+    .legend span{
+      display:inline-block;
+      width:30px;
+      height:0;
+      border-top:3px solid var(--azul);
+      margin-right:6px;
+      vertical-align:middle;
+    }
+
+    .legend .dash{border-top-style:dashed}
+    .legend .strong-l{border-top:6px double var(--verde)}
+    .legend .conf{
+      height:10px;
+      border:0;
+      background:linear-gradient(135deg,transparent 0 25%,var(--vermelho) 25% 36%,transparent 36% 50%,var(--vermelho) 50% 62%,transparent 62%);
+      background-size:24px 10px;
+    }
+
+    /* GAME */
+    .game{
+      overflow:hidden;
+      margin-bottom:22px;
+    }
+
+    .game-head{
+      background:linear-gradient(135deg,var(--azul-escuro),var(--azul),var(--verde));
+      color:#fff;
+      padding:20px 22px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .game-head h3{color:#fff;font-size:1.45rem}
+    .num{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);padding:7px 12px;border-radius:999px;font-weight:900}
+    .game-body{padding:22px}
+    .question{font-size:1.1rem;font-weight:850;margin-bottom:10px;color:var(--texto)}
+    .hint{color:var(--muted);margin-bottom:16px}
+    .game-radio{position:absolute;left:-9999px}
+
+    .choices{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+
+    .choice{
+      display:block;
+      cursor:pointer;
+      border:2px solid var(--linha);
+      border-radius:20px;
+      padding:16px;
+      background:linear-gradient(#fff,#f8fcff);
+      font-weight:900;
+      transition:.2s;
+    }
+
+    .choice small{
+      display:block;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .choice:hover{
+      border-color:var(--azul);
+      background:#eaf6ff;
+    }
+
+    .feedback{
+      display:none;
+      margin-top:14px;
+      border-radius:18px;
+      padding:14px 16px;
+      font-weight:850;
+    }
+
+    .okf{color:#087B47;border:1px solid rgba(0,168,89,.28);background:rgba(0,168,89,.11)}
+    .nof{color:var(--vermelho);border:1px solid rgba(179,38,30,.25);background:rgba(179,38,30,.09)}
+    .unlock{display:none;margin-top:14px}
+
+    #l1c:checked~.choices label[for=l1c],
+    #l2c:checked~.choices label[for=l2c],
+    #l3c:checked~.choices label[for=l3c],
+    #l4c:checked~.choices label[for=l4c]{
+      border-color:rgba(0,168,89,.55);
+      background:rgba(0,168,89,.12);
+      color:#087B47;
+    }
+
+    #l1a:checked~.choices label[for=l1a],
+    #l1b:checked~.choices label[for=l1b],
+    #l1d:checked~.choices label[for=l1d],
+    #l2a:checked~.choices label[for=l2a],
+    #l2b:checked~.choices label[for=l2b],
+    #l2d:checked~.choices label[for=l2d],
+    #l3a:checked~.choices label[for=l3a],
+    #l3b:checked~.choices label[for=l3b],
+    #l3d:checked~.choices label[for=l3d],
+    #l4a:checked~.choices label[for=l4a],
+    #l4b:checked~.choices label[for=l4b],
+    #l4d:checked~.choices label[for=l4d]{
+      border-color:rgba(179,38,30,.45);
+      background:rgba(179,38,30,.08);
+      color:var(--vermelho);
+    }
+
+    #l1a:checked~.choices label[for=l1c],
+    #l1b:checked~.choices label[for=l1c],
+    #l1d:checked~.choices label[for=l1c],
+    #l2a:checked~.choices label[for=l2c],
+    #l2b:checked~.choices label[for=l2c],
+    #l2d:checked~.choices label[for=l2c],
+    #l3a:checked~.choices label[for=l3c],
+    #l3b:checked~.choices label[for=l3c],
+    #l3d:checked~.choices label[for=l3c],
+    #l4a:checked~.choices label[for=l4c],
+    #l4b:checked~.choices label[for=l4c],
+    #l4d:checked~.choices label[for=l4c]{
+      border-color:rgba(0,168,89,.55);
+      background:rgba(0,168,89,.12);
+      color:#087B47;
+    }
+
+    #l1c:checked~.fok,#l2c:checked~.fok,#l3c:checked~.fok,#l4c:checked~.fok{display:block}
+    #l1c:checked~.unlock,#l2c:checked~.unlock,#l3c:checked~.unlock,#l4c:checked~.unlock{display:block}
+
+    #l1a:checked~.fno,#l1b:checked~.fno,#l1d:checked~.fno,
+    #l2a:checked~.fno,#l2b:checked~.fno,#l2d:checked~.fno,
+    #l3a:checked~.fno,#l3b:checked~.fno,#l3d:checked~.fno,
+    #l4a:checked~.fno,#l4b:checked~.fno,#l4d:checked~.fno{display:block}
+
+    .refs{
+      background:var(--azul-escuro);
+      color:white;
+    }
+
+    .refs .heading h2,.refs .heading p{color:white}
+    .refs-list{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:24px;
+      padding:24px;
+      display:grid;
+      gap:12px;
+    }
+
+    .refs-list p{color:rgba(255,255,255,.84);font-size:.94rem}
+    .group{
+      margin-top:24px;
+      background:rgba(0,168,89,.24);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:24px;
+      padding:24px;
+    }
+
+    .names{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .name{
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:999px;
+      padding:9px 13px;
+      font-weight:850;
+    }
+
+    footer{
+      background:var(--azul-escuro);
+      color:rgba(255,255,255,.78);
+      text-align:center;
+      padding:24px 18px 40px;
+      font-size:.9rem;
+    }
+
+
+    .route{
+      display:grid;
+      gap:18px;
+    }
+
+    .route-card{
+      background:white;
+      border:1px solid var(--linha);
+      border-radius:28px;
+      box-shadow:var(--sombra);
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .route-card:before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      width:8px;
+      height:100%;
+      background:linear-gradient(var(--azul),var(--verde));
+    }
+
+    .route-card h3{
+      font-size:1.28rem;
+      margin-bottom:8px;
+    }
+
+    .route-card p{
+      margin-bottom:10px;
+    }
+
+    .route-number{
+      display:inline-grid;
+      place-items:center;
+      width:38px;
+      height:38px;
+      border-radius:14px;
+      background:var(--fundo);
+      color:var(--azul);
+      font-weight:900;
+      margin-bottom:12px;
+    }
+
+    .didactic-flow{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:12px;
+      margin-top:22px;
+    }
+
+    .flow-step{
+      background:white;
+      border:1px solid var(--linha);
+      border-radius:22px;
+      box-shadow:0 10px 25px rgba(0,92,169,.07);
+      padding:18px;
+      min-height:150px;
+    }
+
+    .flow-step strong{
+      display:block;
+      color:var(--azul-escuro);
+      margin-bottom:7px;
+    }
+
+    .flow-step span{
+      color:var(--muted);
+      font-size:.94rem;
+    }
+
+    .bridge-box{
+      background:linear-gradient(135deg,var(--azul-escuro),var(--azul),var(--verde));
+      color:white;
+      border-radius:30px;
+      padding:30px;
+      box-shadow:var(--sombra);
+    }
+
+    .bridge-box h2,
+    .bridge-box p{
+      color:white;
+    }
+
+    .bridge-box p{
+      color:rgba(255,255,255,.86);
+    }
+
+    .variable-card{
+      background:white;
+      border:1px solid var(--linha);
+      border-radius:24px;
+      box-shadow:0 10px 28px rgba(0,92,169,.06);
+      padding:22px;
+    }
+
+    .variable-card h3{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .variable-dot{
+      width:14px;
+      height:14px;
+      border-radius:50%;
+      background:var(--verde);
+      flex:0 0 auto;
+    }
+
+    .mini-title{
+      color:var(--verde-escuro);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      font-size:.78rem;
+      margin-bottom:8px;
+    }
+
+    @media(max-width:1050px){
+      .didactic-flow{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media(max-width:700px){
+      .didactic-flow{grid-template-columns:1fr}
+    }
+
+    @media(max-width:1050px){
+      .hero-grid,.grid2,.builder-layout{grid-template-columns:1fr}
+      .grid4,.grid3,.flash-grid{grid-template-columns:repeat(2,1fr)}
+      .builder-aside{position:relative;top:0}
+    }
+
+    @media(max-width:850px){
+      section{padding:68px 16px}
+      .links{display:none}
+      .grid4,.grid3,.grid2,.flash-grid,.choices{grid-template-columns:1fr}
+      .sheet-wrap{padding:14px}
+      .sulfite{transform:scale(.78);transform-origin:top left;margin:0;width:794px}
+      .sheet-viewport{height:880px;overflow:auto}
+      .legend{grid-template-columns:1fr 1fr}
+    }
+
+    @media(max-width:600px){
+      .legend{grid-template-columns:1fr}
+      .sulfite{transform:scale(.68)}
+      .sheet-viewport{height:790px}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a class="brand" href="#inicio"><span class="brand-mark">+</span><span>Genograma na UBS</span></a>
+      <div class="links">
+        <a href="#didatico">Começo</a>
+        <a href="#origem">Origem</a>
+        <a href="#ubs">UBS</a>
+        <a href="#gravidez">Gravidez</a>
+        <a href="#montar">Montar</a>
+        <a href="#flashcards">Flashcards</a>
+        <a href="#jogo">Jogo</a>
+        <a href="#referencias">Referências</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <div class="pill">Psicologia Social • UBS • SUS</div>
+          <h1>Genograma: entender a família para <span>cuidar melhor</span>.</h1>
+          <p class="lead">
+            Antes de falar sobre gravidez precoce, vamos entender o básico: o que é um genograma, como ele começou a ser usado,
+            por que ele é relevante na UBS e como ajuda a equipe a compreender vulnerabilidades, vínculos e possibilidades de cuidado.
+          </p>
+          <div class="row">
+            <a class="btn btn1" href="#montar">Montar o genograma</a>
+            <a class="btn btn2" href="#historia">Conhecer Camila</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="profile">
+            <div class="avatar">C</div>
+            <h2>Camila, 15 anos</h2>
+            <ul>
+              <li>Adolescente negra, moradora de território periférico urbano.</li>
+              <li>Está no 9º ano e teme interromper os estudos.</li>
+              <li>Mora com a avó materna, Dona Vera, principal figura de cuidado.</li>
+              <li>Chega à UBS com Lucas após atraso menstrual.</li>
+              <li>Deseja manter a gestação e formar sua própria família.</li>
+            </ul>
+            <div class="info">
+              <strong>Leitura ética:</strong>
+              <p>A raça/cor de Camila não é causa da gravidez. Ela aparece para discutir racismo estrutural, desigualdade territorial e acesso desigual à proteção social.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+</section>
+
+    <section id="didatico">
+      <div class="container">
+        <div class="heading">
+          <h2>Começando do zero: o que é um genograma?</h2>
+          <p>O genograma é uma ferramenta visual que representa a família, seus vínculos, eventos importantes e padrões que atravessam gerações.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="route-card">
+            <div class="route-number">1</div>
+            <h3>Não é só “árvore genealógica”</h3>
+            <p>A árvore genealógica mostra parentesco. O genograma mostra parentesco, vínculos, conflitos, separações, ausências, alianças, gestações, perdas, adoecimentos e redes de apoio.</p>
+            <p>Por isso, ele ajuda a entender a família como sistema vivo, e não como uma lista de nomes.</p>
+          </div>
+
+          <div class="route-card">
+            <div class="route-number">2</div>
+            <h3>É um mapa de relações</h3>
+            <p>Ele permite visualizar quem cuida, quem está afastado, onde existe conflito, onde há proteção e quais acontecimentos se repetem ao longo das gerações.</p>
+            <p>Em vez de perguntar só “quem mora com você?”, o profissional passa a compreender “como essa família funciona?”.</p>
+          </div>
+
+          <div class="route-card">
+            <div class="route-number">3</div>
+            <h3>É uma ferramenta de cuidado</h3>
+            <p>Na saúde, o genograma ajuda a transformar informações familiares em decisões concretas: quem deve ser incluído no cuidado, que riscos precisam ser acompanhados e quais redes podem ser acionadas.</p>
+          </div>
+        </div>
+
+        <div class="info">
+          <strong>Ideia central para a feira:</strong>
+          <p>O genograma é uma forma de “ver” graficamente a história familiar. Ele não serve para julgar a família, mas para compreender relações, vulnerabilidades e possibilidades de cuidado.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="origem" style="background:var(--fundo2)">
+      <div class="container">
+        <div class="heading">
+          <h2>Como o genograma começou a ser utilizado?</h2>
+          <p>Ele se consolidou no campo da terapia familiar e da abordagem sistêmica, especialmente pela necessidade de compreender padrões que atravessam gerações.</p>
+        </div>
+
+        <div class="route">
+          <div class="route-card">
+            <div class="mini-title">1. Base sistêmica</div>
+            <h3>Da pessoa isolada para a pessoa em relação</h3>
+            <p>Na abordagem sistêmica, o indivíduo não é compreendido apenas de maneira isolada. Ele é visto em relação com sua família, seu contexto, seus vínculos e suas histórias anteriores.</p>
+            <p>Isso é essencial para a Psicologia Social, porque evita explicações simplistas do tipo “foi uma escolha individual” e abre espaço para pensar contexto, desigualdade e rede.</p>
+          </div>
+
+          <div class="route-card">
+            <div class="mini-title">2. Uso clínico</div>
+            <h3>O genograma passou a organizar padrões familiares</h3>
+            <p>Com autores da terapia familiar, especialmente Murray Bowen e depois McGoldrick e Gerson, o genograma passou a ser usado para registrar graficamente relações, casamentos, separações, mortes, conflitos e repetições transgeracionais.</p>
+            <p>Ele virou uma linguagem visual comum entre profissionais, facilitando a leitura da história familiar.</p>
+          </div>
+
+          <div class="route-card">
+            <div class="mini-title">3. Entrada na saúde pública</div>
+            <h3>Na Atenção Primária, ele ganhou função territorial</h3>
+            <p>Na UBS, o genograma não é usado apenas como instrumento terapêutico individual. Ele ajuda a equipe a compreender famílias acompanhadas no território, sobretudo em situações complexas que envolvem vulnerabilidade, cuidado continuado e rede intersetorial.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ubs">
+      <div class="container">
+        <div class="heading">
+          <h2>Por que o genograma é tão relevante na UBS?</h2>
+          <p>A UBS acompanha pessoas ao longo do tempo e dentro de um território. Por isso, precisa enxergar mais do que sintomas: precisa enxergar contextos de vida.</p>
+        </div>
+
+        <div class="didactic-flow">
+          <div class="flow-step"><strong>1. Acolher</strong><span>O genograma facilita uma conversa mais humana, porque parte da história da pessoa e não apenas da queixa.</span></div>
+          <div class="flow-step"><strong>2. Mapear</strong><span>Mostra quem mora junto, quem cuida, quem está ausente, quem apoia e quem pode estar sobrecarregado.</span></div>
+          <div class="flow-step"><strong>3. Interpretar</strong><span>Ajuda a perceber padrões familiares, conflitos, rupturas, vínculos protetivos e riscos psicossociais.</span></div>
+          <div class="flow-step"><strong>4. Planejar</strong><span>Orienta a construção do Projeto Terapêutico Singular com ações possíveis e realistas.</span></div>
+          <div class="flow-step"><strong>5. Articular</strong><span>Ajuda a decidir quando envolver escola, CRAS, Conselho Tutelar, eMulti, ACS e outros recursos da rede.</span></div>
+        </div>
+
+        <div class="info">
+          <strong>Na UBS, o genograma é uma ponte.</strong>
+          <p>Ele liga a consulta individual ao território, à família e à rede de cuidado. Por isso é tão útil em situações como gravidez na adolescência, sofrimento psíquico, violência, doenças crônicas, dependência, luto e vulnerabilidade social.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="gravidez" style="background:var(--fundo2)">
+      <div class="container">
+        <div class="bridge-box">
+          <div class="mini-title" style="color:#FDC300">Transição para o tema da feira</div>
+          <h2>Da ferramenta ao problema social: por que falar de gravidez precoce?</h2>
+          <p>Depois de entender o genograma, fica mais fácil compreender por que ele é importante no tema da gravidez na adolescência. A gravidez precoce não deve ser lida apenas como um fato biológico ou uma “falha individual”. Ela pode estar atravessada por condições de vida, desejo de pertencimento, fragilidades de rede, desigualdades, abandono, relações afetivas, escola e projetos de futuro.</p>
+          <p>É justamente aí que o genograma ajuda: ele mostra visualmente como a gravidez aparece dentro de uma história familiar e social.</p>
+        </div>
+
+        <div class="heading" style="margin-top:44px">
+          <h2>Quais variáveis a UBS precisa observar?</h2>
+          <p>O genograma ajuda a equipe a organizar variáveis que muitas vezes ficam espalhadas na fala da usuária.</p>
+        </div>
+
+        <div class="grid4">
+          <div class="variable-card"><h3><span class="variable-dot"></span>Raça/cor e racismo</h3><p>Não como causa individual, mas como marcador social que pode atravessar acesso, oportunidades, proteção e tratamento recebido nos serviços.</p></div>
+          <div class="variable-card"><h3><span class="variable-dot"></span>Renda</h3><p>Dependência financeira, trabalho informal, insegurança material e dificuldade de sustentar a chegada de um bebê.</p></div>
+          <div class="variable-card"><h3><span class="variable-dot"></span>Escola</h3><p>Risco de evasão, vergonha, cansaço, falta de transporte, ausência de rede para cuidar do bebê e perda de projeto educacional.</p></div>
+          <div class="variable-card"><h3><span class="variable-dot"></span>Rede familiar</h3><p>Quem apoia? Quem se afasta? Quem sobrecarrega? Quem pode ser incluído no cuidado?</p></div>
+          <div class="variable-card"><h3><span class="variable-dot"></span>Parceiro</h3><p>Lucas também é adolescente. A UBS pode incluir a paternidade, sem apagar a responsabilidade dele e sem culpabilizar Camila sozinha.</p></div>
+          <div class="variable-card"><h3><span class="variable-dot"></span>Pai da adolescente</h3><p>A presença irregular de Marcos mostra que ausências também influenciam a organização familiar e emocional.</p></div>
+          <div class="variable-card"><h3><span class="variable-dot"></span>História materna</h3><p>Quando mãe e avó também foram mães adolescentes, a equipe pode investigar padrões transgeracionais sem julgamento.</p></div>
+          <div class="variable-card"><h3><span class="variable-dot"></span>Projeto de vida</h3><p>Para algumas adolescentes, a maternidade aparece como busca de pertencimento, autonomia, amor ou saída simbólica de um lugar de sofrimento.</p></div>
+        </div>
+
+        <div class="info">
+          <strong>Conclusão da transição:</strong>
+          <p>A gravidez de Camila não é entendida apenas pela idade dela. O genograma permite que a equipe veja a gravidez dentro de um conjunto de relações, vulnerabilidades, desejos, ausências e redes de apoio.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="historia">
+      <div class="container">
+        <div class="heading">
+          <h2>A história de Camila</h2>
+          <p>O caso é fictício e educativo. Ele foi construído para mostrar como o genograma ajuda a UBS a sair de uma leitura individualizante e chegar a uma compreensão clínica e social.</p>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <h3>Quem é Camila?</h3>
+            <p>Camila é uma adolescente negra de 15 anos, moradora de uma região periférica. Ela estuda, mas sente que a escola já não é um espaço de pertencimento. Com a gestação, teme o julgamento dos colegas, a falta de transporte, o cansaço e a dificuldade de continuar frequentando as aulas.</p>
+          </div>
+
+          <div class="card">
+            <h3>Dependência financeira</h3>
+            <p>Camila depende financeiramente da avó, Dona Vera, que trabalha de forma informal e sustenta a casa com renda instável. Lucas, parceiro de Camila, tem 17 anos, interrompeu os estudos e faz bicos ocasionais, sem garantia de renda.</p>
+          </div>
+
+          <div class="card">
+            <h3>A mãe: Sônia</h3>
+            <p>Sônia, mãe de Camila, tem 35 anos e também engravidou aos 15. A relação entre mãe e filha é marcada por conflitos, afastamento emocional e sensação de abandono. Camila relata que “não quer repetir a vida da mãe”, mas o genograma mostra que alguns padrões estão reaparecendo.</p>
+          </div>
+
+          <div class="card">
+            <h3>O pai: Marcos</h3>
+            <p>Marcos, pai de Camila, tem 38 anos. Nunca conviveu de forma estável com a filha e oferece apoio financeiro irregular. Sua presença aparece no genograma não para culpabilizar, mas para mostrar que ausências também fazem parte da organização familiar.</p>
+          </div>
+
+          <div class="card">
+            <h3>Chegada à UBS</h3>
+            <p>Camila chega à UBS acompanhada de Lucas por atraso menstrual. O teste confirma a gestação. Ela demonstra alegria e medo ao mesmo tempo. A equipe acolhe sem julgamento e propõe construir um genograma junto com ela.</p>
+          </div>
+
+          <div class="card">
+            <h3>Por que o genograma ajuda aqui?</h3>
+            <p>Sem o genograma, a equipe poderia ver apenas “uma adolescente grávida”. Com o genograma, aparecem vínculos, conflitos, repetições familiares, rede de apoio, risco de evasão escolar, dependência econômica e possibilidades concretas de cuidado.</p>
+          </div>
+        </div>
+
+        <div class="timeline" style="margin-top:22px">
+          <div class="card"><h3>1. Acolhimento</h3><p>A UBS escuta Camila sem julgamento e reconhece sua ambivalência: felicidade, medo, desejo de autonomia e insegurança.</p></div>
+          <div class="card"><h3>2. Construção do genograma</h3><p>Camila narra a família e a equipe desenha. O desenho transforma a história em algo visível.</p></div>
+          <div class="card"><h3>3. Insight</h3><p>Camila percebe que sua gestação dialoga com histórias anteriores: Dona Vera e Sônia também foram mães adolescentes.</p></div>
+          <div class="card"><h3>4. Plano de cuidado</h3><p>A UBS pensa pré-natal, psicologia, permanência escolar, CRAS, participação de Lucas, inclusão possível de Marcos e apoio à avó.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="dados" style="background:var(--fundo2)">
+      <div class="container">
+        <div class="heading">
+          <h2>Dados e determinantes sociais</h2>
+          <p>A gravidez na adolescência é um fenômeno de saúde pública e precisa ser compreendida para além da biologia.</p>
+        </div>
+
+        <div class="grid4">
+          <div class="stat"><strong>+1 milhão</strong><span>de nascimentos com mães adolescentes no Brasil entre 2020 e 2022, segundo estudos baseados no SINASC.</span></div>
+          <div class="stat"><strong>49 mil+</strong><span>casos entre meninas de 10 a 14 anos no mesmo período, faixa que exige leitura protetiva e intersetorial.</span></div>
+          <div class="stat"><strong>Desigualdade</strong><span>território, renda, raça/cor, escola e proteção social interferem no risco e nas possibilidades de cuidado.</span></div>
+          <div class="stat"><strong>UBS</strong><span>a Atenção Primária pode acolher, acompanhar, fortalecer vínculos e articular a rede.</span></div>
+        </div>
+
+        <div class="info">
+          <strong>Leitura da Psicologia Social:</strong>
+          <p>A pergunta não deve ser apenas “por que ela engravidou?”, mas também “quais condições de vida, vínculos, ausências, desejos e possibilidades atravessam essa gravidez?”.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="conceito">
+      <div class="container">
+        <div class="heading">
+          <h2>O que é genograma?</h2>
+          <p>É uma representação gráfica da família em pelo menos três gerações. Na UBS, ele funciona como uma ferramenta de mapeamento, acolhimento e intervenção.</p>
+        </div>
+
+        <div class="grid4">
+          <div class="card"><div class="icon">3G</div><h3>Três gerações</h3><p>Ajuda a visualizar avós, pais, pessoa índice, parceiros, filhos e gestação.</p></div>
+          <div class="card"><div class="icon">○□</div><h3>Estrutura familiar</h3><p>Mostra quem faz parte da família, quem mora junto, separações, ausências e cuidadores.</p></div>
+          <div class="card"><div class="icon">↔</div><h3>Vínculos</h3><p>Permite indicar proximidade, conflito, rompimento, dependência, apoio e distanciamento.</p></div>
+          <div class="card"><div class="icon">PTS</div><h3>Intervenção</h3><p>Ajuda a construir um Projeto Terapêutico Singular com equipe, família e rede.</p></div>
+        </div>
+
+        <div class="info">
+          <strong>Não é árvore genealógica:</strong>
+          <p>A árvore genealógica mostra parentesco. O genograma mostra parentesco, relações, padrões, riscos e recursos de cuidado.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="montar" style="background:var(--fundo2)">
+      <div class="container">
+        <div class="heading">
+          <h2>Montar o genograma na folha sulfite</h2>
+          <p>Clique nos passos ao lado. A folha vai sendo preenchida como se a equipe estivesse desenhando durante uma consulta na UBS.</p>
+        </div>
+
+        <input class="radio" type="radio" name="passo" id="p1" checked>
+        <input class="radio" type="radio" name="passo" id="p2">
+        <input class="radio" type="radio" name="passo" id="p3">
+        <input class="radio" type="radio" name="passo" id="p4">
+        <input class="radio" type="radio" name="passo" id="p5">
+        <input class="radio" type="radio" name="passo" id="p6">
+        <input class="radio" type="radio" name="passo" id="p7">
+
+        <section class="builder-layout">
+          <aside class="builder-aside">
+            <h3>Passos do genograma</h3>
+            <p>Clique em cada etapa. O desenho aparece progressivamente na folha.</p>
+
+            <div class="steps">
+              <label class="step" for="p1">1. Pessoa índice<small>Camila aparece primeiro, destacada.</small></label>
+              <label class="step" for="p2">2. Família principal<small>Entram avó, avô, mãe e pai.</small></label>
+              <label class="step" for="p3">3. Linhas de família<small>Aparecem filiação, divórcio e relação breve.</small></label>
+              <label class="step" for="p4">4. Vínculos emocionais<small>Fusão com avó, conflito com mãe e pai distante.</small></label>
+              <label class="step" for="p5">5. Lucas e gestação<small>Entram parceiro, união informal e gravidez.</small></label>
+              <label class="step" for="p6">6. Padrão revelado<small>Aparece a repetição transgeracional.</small></label>
+              <label class="step" for="p7">7. Leitura para UBS<small>O desenho vira plano de cuidado.</small></label>
+            </div>
+
+            <div class="explain">
+              <div class="exp exp1"><strong>Passo 1:</strong> Camila é a pessoa índice, ou seja, o foco do cuidado na UBS.</div>
+              <div class="exp exp2"><strong>Passo 2:</strong> A família principal entra no mapa. Camila vive dentro de relações familiares e sociais.</div>
+              <div class="exp exp3"><strong>Passo 3:</strong> As linhas organizam a estrutura: avós divorciados, mãe e pai com relação breve, e Camila como filha desse vínculo.</div>
+              <div class="exp exp4"><strong>Passo 4:</strong> O genograma mostra vínculo intenso com a avó, conflito com a mãe e distância do pai.</div>
+              <div class="exp exp5"><strong>Passo 5:</strong> Lucas e a gestação entram. A gravidez é lida dentro de um sistema familiar, afetivo e social.</div>
+              <div class="exp exp6"><strong>Passo 6:</strong> O padrão aparece visualmente: avó, mãe e Camila vivenciam maternidade na adolescência.</div>
+              <div class="exp exp7"><strong>Passo 7:</strong> A UBS usa essa leitura para construir cuidado: pré-natal, psicologia, escola, CRAS, inclusão do parceiro e fortalecimento da rede.</div>
+            </div>
+          </aside>
+
+          <div class="sheet-wrap">
+            <div class="sheet-title">
+              <div>
+                <h3>Folha sulfite: genograma do caso Camila</h3>
+                <p>Formato visual de consulta: o desenho vai sendo criado passo a passo.</p>
+              </div>
+              <span class="badge">Cores do SUS</span>
+            </div>
+
+            <div class="sheet-viewport">
+              <div class="sulfite">
+                <div class="paper-header">
+                  <div>
+                    <h3>Genograma familiar — Caso Camila</h3>
+                    <p>UBS | Atenção Primária à Saúde | Construção participativa</p>
+                  </div>
+                  <div class="sus-mark">SUS + UBS</div>
+                </div>
+
+                <div class="gen-label g1" data-step="2">Geração 1 — Avós</div>
+                <div class="gen-label g2" data-step="2">Geração 2 — Mãe e pai</div>
+                <div class="gen-label g3" data-step="1">Geração 3 — Camila, parceiro e gestação</div>
+
+                <div class="node female index" data-step="1" style="left:300px;top:735px;">
+                  <div class="shape">Camila<br><small>15 anos</small><small>pessoa índice</small></div>
+                </div>
+                <div class="note" data-step="1" style="left:310px;top:852px;">◉ foco do cuidado na UBS</div>
+
+                <div class="node female" data-step="2" style="left:120px;top:180px;">
+                  <div class="shape">Dona Vera<br><small>52 anos</small><small>avó materna</small></div>
+                </div>
+
+                <div class="node male" data-step="2" style="left:420px;top:180px;">
+                  <div class="shape">Seu Antônio<br><small>55 anos</small><small>avô materno</small></div>
+                </div>
+
+                <div class="node female" data-step="2" style="left:235px;top:455px;">
+                  <div class="shape">Sônia<br><small>35 anos</small><small>mãe de Camila</small></div>
+                </div>
+
+                <div class="node male" data-step="2" style="left:505px;top:455px;">
+                  <div class="shape">Marcos<br><small>38 anos</small><small>pai de Camila</small></div>
+                </div>
+
+                <div class="line keep" data-step="3" style="left:224px;top:232px;width:196px;"></div>
+                <div class="note" data-step="3" style="left:300px;top:190px;">// divórcio</div>
+
+                <div class="line vertical" data-step="3" style="left:322px;top:232px;height:120px;"></div>
+                <div class="line dashed keep" data-step="3" style="left:339px;top:507px;width:166px;"></div>
+                <div class="note" data-step="3" style="left:358px;top:465px;">relação breve / separação</div>
+
+                <div class="line vertical dashed" data-step="3" style="left:419px;top:507px;height:228px;"></div>
+                <div class="note" data-step="3" style="left:432px;top:600px;">filiação com apoio paterno irregular</div>
+
+                <div class="note" data-step="3" style="left:92px;top:292px;">Dona Vera foi mãe adolescente</div>
+                <div class="note" data-step="3" style="left:215px;top:570px;">Sônia foi mãe aos 15 anos</div>
+
+                <div class="line strong keep" data-step="4" style="left:196px;top:286px;width:590px;transform:rotate(63deg);"></div>
+                <div class="note" data-step="4" style="left:66px;top:640px;">vínculo muito próximo / fusão com a avó</div>
+
+                <div class="line conflict keep" data-step="4" style="left:316px;top:560px;width:210px;transform:rotate(88deg);"></div>
+                <div class="note" data-step="4" style="left:245px;top:665px;">conflito e rompimento com Sônia</div>
+
+                <div class="line dashed keep" data-step="4" style="left:516px;top:560px;width:175px;transform:rotate(130deg);"></div>
+                <div class="note" data-step="4" style="left:520px;top:635px;">pai distante, mas não apagado</div>
+
+                <div class="node male" data-step="5" style="left:545px;top:735px;">
+                  <div class="shape">Lucas<br><small>17 anos</small><small>renda instável</small></div>
+                </div>
+
+                <div class="line dashed keep" data-step="5" style="left:404px;top:787px;width:141px;"></div>
+                <div class="note" data-step="5" style="left:430px;top:750px;">união informal</div>
+
+                <div class="line vertical" data-step="5" style="left:474px;top:787px;height:112px;"></div>
+                <div class="tri" data-step="5" style="left:424px;top:895px;"></div>
+                <div class="note" data-step="5" style="left:535px;top:930px;">gestação atual aos 15 anos</div>
+
+                <div class="pattern-box" data-step="6">
+                  <strong>Padrão revelado:</strong> o genograma mostra uma repetição transgeracional da maternidade na adolescência: Dona Vera, Sônia e Camila. A função do desenho não é culpar Camila, mas ajudar a equipe a compreender o contexto e intervir com cuidado.
+                </div>
+
+                <div class="note" data-step="7" style="left:80px;top:1020px;background:#EAFBF3;color:#087B47;border-color:rgba(0,168,89,.25);border-radius:16px;white-space:normal;width:635px;">
+                  <strong>Leitura para a UBS:</strong> pré-natal humanizado, escuta psicológica, permanência escolar, inclusão de Lucas, tentativa de responsabilização possível de Marcos, apoio à avó e articulação com CRAS/escola/rede de proteção.
+                </div>
+              </div>
+            </div>
+
+            <div class="legend">
+              <div>○ Círculo = mulher</div>
+              <div>□ Quadrado = homem</div>
+              <div>△ Triângulo = gestação</div>
+              <div>◉ Ponto = pessoa índice</div>
+              <div><span></span> Linha contínua</div>
+              <div><span class="dash"></span> Linha tracejada</div>
+              <div><span class="strong-l"></span> Vínculo próximo</div>
+              <div><span class="conf"></span> Conflito/rompimento</div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="flashcards">
+      <div class="container">
+        <div class="heading">
+          <h2>Flashcards interativos</h2>
+          <p>Clique em cada card para virar e revisar os conceitos principais.</p>
+        </div>
+
+        <div class="flash-grid">
+          <label class="flashcard"><input type="checkbox"><div class="flash-inner"><div class="flash-face"><div><div class="flash-top">Conceito</div><h3>Genograma</h3><p>Mapa da família e das relações.</p></div><small>Toque para virar</small></div><div class="flash-face flash-back"><div><h3>Por que importa?</h3><p>Mostra estrutura, vínculos, repetições familiares e possibilidades de cuidado.</p></div><small>Clique novamente</small></div></div></label>
+          <label class="flashcard"><input type="checkbox"><div class="flash-inner"><div class="flash-face"><div><div class="flash-top">Social</div><h3>Vulnerabilidade</h3><p>Não é defeito individual.</p></div><small>Toque para virar</small></div><div class="flash-face flash-back"><div><h3>O que significa?</h3><p>Condições de vida que aumentam riscos: renda, território, racismo, escola, violência e baixa rede de apoio.</p></div><small>Clique novamente</small></div></div></label>
+          <label class="flashcard"><input type="checkbox"><div class="flash-inner"><div class="flash-face"><div><div class="flash-top">Caso</div><h3>Padrão</h3><p>Algo se repete nas gerações.</p></div><small>Toque para virar</small></div><div class="flash-face flash-back"><div><h3>No caso Camila</h3><p>Dona Vera, Sônia e Camila vivenciam maternidade na adolescência.</p></div><small>Clique novamente</small></div></div></label>
+          <label class="flashcard"><input type="checkbox"><div class="flash-inner"><div class="flash-face"><div><div class="flash-top">UBS</div><h3>PTS</h3><p>Projeto Terapêutico Singular.</p></div><small>Toque para virar</small></div><div class="flash-face flash-back"><div><h3>Na prática</h3><p>Organiza pré-natal, psicologia, escola, CRAS, parceiro, pai e rede de apoio.</p></div><small>Clique novamente</small></div></div></label>
+        </div>
+      </div>
+    </section>
+
+    <section id="jogo" style="background:var(--fundo2)">
+      <div class="container">
+        <div class="heading">
+          <h2>Jogo digital: Detetives da UBS</h2>
+          <p>Responda às fases para testar a leitura do caso Camila.</p>
+        </div>
+
+        <div class="game" id="fase1"><div class="game-head"><h3>Fase 1 — Pessoa índice</h3><span class="num">1/4</span></div><div class="game-body"><p class="question">Quem é a pessoa índice do genograma?</p><p class="hint">Pessoa índice é quem está no centro do cuidado.</p><input class="game-radio" type="radio" name="l1" id="l1a"><input class="game-radio" type="radio" name="l1" id="l1c"><input class="game-radio" type="radio" name="l1" id="l1b"><input class="game-radio" type="radio" name="l1" id="l1d"><div class="choices"><label class="choice" for="l1a">Lucas</label><label class="choice" for="l1c">Camila</label><label class="choice" for="l1b">Dona Vera</label><label class="choice" for="l1d">Marcos</label></div><div class="feedback okf fok">Correto! Camila é a pessoa índice.</div><div class="feedback nof fno">Quase! A pessoa índice é Camila.</div><div class="unlock"><a class="btn btn3" href="#fase2">Ir para fase 2</a></div></div></div>
+
+        <div class="game" id="fase2"><div class="game-head"><h3>Fase 2 — Símbolo</h3><span class="num">2/4</span></div><div class="game-body"><p class="question">Qual símbolo representa gestação?</p><input class="game-radio" type="radio" name="l2" id="l2a"><input class="game-radio" type="radio" name="l2" id="l2b"><input class="game-radio" type="radio" name="l2" id="l2c"><input class="game-radio" type="radio" name="l2" id="l2d"><div class="choices"><label class="choice" for="l2a">Círculo</label><label class="choice" for="l2b">Quadrado</label><label class="choice" for="l2c">Triângulo</label><label class="choice" for="l2d">Linha tripla</label></div><div class="feedback okf fok">Correto! O triângulo representa gestação.</div><div class="feedback nof fno">Quase! O símbolo da gestação é o triângulo.</div><div class="unlock"><a class="btn btn3" href="#fase3">Ir para fase 3</a></div></div></div>
+
+        <div class="game" id="fase3"><div class="game-head"><h3>Fase 3 — Padrão</h3><span class="num">3/4</span></div><div class="game-body"><p class="question">O que o genograma revela no caso?</p><input class="game-radio" type="radio" name="l3" id="l3a"><input class="game-radio" type="radio" name="l3" id="l3b"><input class="game-radio" type="radio" name="l3" id="l3c"><input class="game-radio" type="radio" name="l3" id="l3d"><div class="choices"><label class="choice" for="l3a">Coincidência sem importância</label><label class="choice" for="l3b">Doença genética</label><label class="choice" for="l3c">Repetição transgeracional da maternidade adolescente</label><label class="choice" for="l3d">Apenas falta de informação</label></div><div class="feedback okf fok">Correto! O padrão é transgeracional.</div><div class="feedback nof fno">Quase! O padrão é a repetição transgeracional da maternidade adolescente.</div><div class="unlock"><a class="btn btn3" href="#fase4">Ir para fase 4</a></div></div></div>
+
+        <div class="game" id="fase4"><div class="game-head"><h3>Fase 4 — UBS</h3><span class="num">4/4</span></div><div class="game-body"><p class="question">Qual ação combina melhor com a Atenção Primária?</p><input class="game-radio" type="radio" name="l4" id="l4a"><input class="game-radio" type="radio" name="l4" id="l4b"><input class="game-radio" type="radio" name="l4" id="l4c"><input class="game-radio" type="radio" name="l4" id="l4d"><div class="choices"><label class="choice" for="l4a">Julgar Camila</label><label class="choice" for="l4b">Só pedir exames</label><label class="choice" for="l4c">Acolher, acompanhar pré-natal, envolver equipe e articular rede</label><label class="choice" for="l4d">Ignorar a família</label></div><div class="feedback okf fok">Correto! A UBS deve acolher, acompanhar e articular cuidado em rede.</div><div class="feedback nof fno">Quase! A melhor resposta envolve acolhimento, pré-natal, equipe e rede.</div><div class="unlock"><a class="btn btn3" href="#referencias">Concluir</a></div></div></div>
+      </div>
+    </section>
+
+    <section class="refs" id="referencias">
+      <div class="container">
+        <div class="heading">
+          <h2>Referências</h2>
+          <p>Base teórica e técnica utilizada para a construção do material.</p>
+        </div>
+        <div class="refs-list">
+          <p>PENTEADO, Paula Antonelli. Genograma e atenção primária à saúde. Revista Brasileira de Medicina de Família e Comunidade, Rio de Janeiro, v. 20, n. 47, 2025.</p>
+          <p>BRASIL. Ministério da Saúde. Caderno de Atenção Básica: Saúde Sexual e Saúde Reprodutiva. Brasília: Ministério da Saúde, 2010.</p>
+          <p>BRASIL. Ministério da Saúde. Política Nacional de Atenção Básica. Brasília: Ministério da Saúde, 2012.</p>
+          <p>BRASIL. Lei nº 12.015, de 7 de agosto de 2009. Altera o Código Penal e dispõe sobre crimes contra a dignidade sexual.</p>
+          <p>McGOLDRICK, Monica; GERSON, Randy. Genograms in Family Assessment. New York: W. W. Norton, 1985.</p>
+          <p>McGOLDRICK, Monica; GERSON, Randy; PETRY, Sueli. Genogramas: avaliação e intervenção familiar. Porto Alegre: Artmed, 2012.</p>
+          <p>WENDT, Naiane Carvalho; CREPALDI, Maria Aparecida. A utilização do genograma como instrumento de coleta de dados na pesquisa qualitativa. Psicologia: Reflexão e Crítica, 2008.</p>
+          <p>WORLD HEALTH ORGANIZATION. Adolescent pregnancy. Geneva: WHO, 2020.</p>
+          <p>UNFPA. Fundo de População das Nações Unidas. Relatórios e materiais técnicos sobre gravidez na adolescência, direitos reprodutivos e prevenção. 2022.</p>
+        </div>
+        <div class="group">
+          <h3 style="color:white">Integrantes do grupo</h3>
+          <div class="names">
+            <span class="name">Lorena Soares</span>
+            <span class="name">Luana Belache</span>
+            <span class="name">Maria Clara Ferreira</span>
+            <span class="name">Maria Eduarda Trevisan</span>
+            <span class="name">Rafael Mariano</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Material educativo para feira de Psicologia — Genograma, UBS, SUS e gravidez na adolescência.
+  </footer>
+</body>
+</html>
